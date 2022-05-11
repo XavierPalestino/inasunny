@@ -1,0 +1,14 @@
+<p>
+  <mat-toolbar color="warn">
+    <span>iWanna-Book</span>
+  </mat-toolbar>
+</p>
+<nav mat-tab-nav-bar mat-align-tabs="center">
+  <a mat-tab-link
+  *ngFor="let link of navLinks"
+  [routerLink]="link.link"
+  routerLinkActive #rla="routerLinkActive"
+  [active]="rla.isActive">
+  </a>
+</nav>
+<router-outlet></router-outlet>

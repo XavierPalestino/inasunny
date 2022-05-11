@@ -1,0 +1,59 @@
+<form class="normal-form" [formGroup]="form">
+    <mat-grid-list cols="1" rowHeight="650px">
+        <mat-grid-tile>
+            <div class="controles-container">
+                <mat-form-field>
+                    <input formControlName="title" matInput placeholder="Title">
+                    <mat-error>The field is mandatory</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="pages" type="number" matInput placeholder="Pages">
+                    <mat-error *ngIf="form.controls['pages'].errors?.required">This field is mandatory</mat-error>
+                    <mat-error *ngIf="form.controls['pages'].errors?.min">Books with less than 50 pages aren't accepted</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="isbn" matInput maxlength="13" placeholder="ISBN">
+                    <mat-error *ngIf="form.controls['isbn'].errors?.required">This field is mandatory</mat-error>
+                    <mat-error *ngIf="form.controls['isbn'].errors?.min">ISBN needs 13 characters</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="price" type="number" matInput placeholder="Price">
+                    <mat-error *ngIf="form.controls['price'].errors?.required">This field is mandatory</mat-error>
+                    <mat-error *ngIf="form.controls['price'].errors?.min">The minimum required price is $ 100</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="summary" matInput maxlength="350" placeholder="Summary">
+                    <mat-error>The field is mandatory</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="editorial" matInput placeholder="Editorial">
+                    <mat-error>The field is mandatory</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Release Date</mat-label>
+                    <input formControlName="datePublication" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="datepicker" placeholder="mm/dd/yyyy">
+                    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker></mat-datepicker>
+                    <mat-error *ngIf="form.controls['datePublication'].errors?.required">This field is mandatory or insert invalid date format</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select formControlName="authors" ma placeholder="Authors" multiple>
+                        <mat-option *ngFor="let authors of authorsList" value="{{authors?.id}}">{{authors?.name}} {{authors?.firstName}}</mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select id="choices-multiple-remove-button2" formControlName="categories" placeholder="Categories" multiple>
+                        <mat-option *ngFor="let categories of categoriesList" value="{{categories?.id}}">{{categories?.name}}</mat-option>
+                    </mat-select>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <div class="button-row">
+                    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid"  (click)="onSubmit()">Submit</button>
+                    <button mat-stroked-button color="warn" (click)="onClear()">Clear</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
+

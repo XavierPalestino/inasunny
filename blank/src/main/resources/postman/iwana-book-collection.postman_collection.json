@@ -1,0 +1,730 @@
+{
+	"info": {
+		"_postman_id": "8bd9f112-a056-4a7e-9bdd-a0397ddc52cf",
+		"name": "iwana-book-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Create category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ciencia Ficción\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"category"
+							]
+						},
+						"description": "create new book"
+					},
+					"response": []
+				},
+				{
+					"name": "Update category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Terror\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/category/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"category",
+								"2"
+							]
+						},
+						"description": "update book"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"title test updated2\",\r\n    \"pages\": 800,\r\n    \"isbn\": \"7766-0543-1\",\r\n    \"price\": 597.99,\r\n    \"summary\": \"summary 1\",\r\n    \"editorial\": \"Editorial test\",\r\n    \"datePublication\": \"1995-08-04T06:00:00.000+0000\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/category/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"category",
+								"2"
+							]
+						},
+						"description": "delete book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Update author",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Roberto\",\r\n    \"firstName\": \"Trejo\",\r\n    \"secondName\": \"Pérez\",\r\n    \"birthday\": \"2000-08-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/author/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"author",
+								"2"
+							]
+						},
+						"description": "update book"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete author",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"title test updated2\",\r\n    \"pages\": 800,\r\n    \"isbn\": \"7766-0543-1\",\r\n    \"price\": 597.99,\r\n    \"summary\": \"summary 1\",\r\n    \"editorial\": \"Editorial test\",\r\n    \"datePublication\": \"1995-08-04T06:00:00.000+0000\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/author/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"author",
+								"2"
+							]
+						},
+						"description": "delete book"
+					},
+					"response": []
+				},
+				{
+					"name": "Create author",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Luis\",\r\n    \"firstName\": \"Palestino\",\r\n    \"secondName\": \"Gallardo\",\r\n    \"birthday\": \"1985-01-09\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/author",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"author"
+							]
+						},
+						"description": "create new book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Create book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"title new book\",\r\n    \"pages\": 785,\r\n    \"isbn\": \"7766-0543-1\",\r\n    \"price\": 597.99,\r\n    \"summary\": \"summary 1\",\r\n    \"editorial\": \"Editorial test\",\r\n    \"datePublication\": \"1995-08-04\",\r\n    \"authors\": [1,3],\r\n    \"categories\": [1,2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/book",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"book"
+							]
+						},
+						"description": "create new book"
+					},
+					"response": []
+				},
+				{
+					"name": "Update book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"title test updated2\",\r\n    \"pages\": 800,\r\n    \"isbn\": \"7766-0543-1\",\r\n    \"price\": 597.99,\r\n    \"summary\": \"summary 1\",\r\n    \"editorial\": \"Editorial test\",\r\n    \"datePublication\": \"2015-08-04\",\r\n    \"authors\": [2,3],\r\n    \"categories\": [2]\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/book/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"book",
+								"4"
+							]
+						},
+						"description": "update book"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"title test updated2\",\r\n    \"pages\": 800,\r\n    \"isbn\": \"7766-0543-1\",\r\n    \"price\": 597.99,\r\n    \"summary\": \"summary 1\",\r\n    \"editorial\": \"Editorial test\",\r\n    \"datePublication\": \"1995-08-04T06:00:00.000+0000\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/book/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"book",
+								"5"
+							]
+						},
+						"description": "delete book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ranking",
+			"item": [
+				{
+					"name": "Create ranking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score\": 4,\r\n    \"bookId\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/blank-api/ranking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"blank-api",
+								"ranking"
+							]
+						},
+						"description": "create new book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1. Order by date published ascendant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/?sortField=releaseDate&sortingOrder=ASC&limit=2&offset=0&expand=categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						""
+					],
+					"query": [
+						{
+							"key": "sortField",
+							"value": "releaseDate"
+						},
+						{
+							"key": "sortingOrder",
+							"value": "ASC"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "expand",
+							"value": "categories"
+						}
+					]
+				},
+				"description": "Mostrar todos los libros ordenados por año de publicación ascendente, los resultados deberán de ser paginados."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Order by date published descendant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/?sortField=releaseDate&sortingOrder=DESC&limit=2&offset=0&expand=authors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						""
+					],
+					"query": [
+						{
+							"key": "sortField",
+							"value": "releaseDate"
+						},
+						{
+							"key": "sortingOrder",
+							"value": "DESC"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "expand",
+							"value": "authors"
+						}
+					]
+				},
+				"description": "Libros descendentes por año de publicación."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Books by author",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/author?author=author-1&expand=authors,categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						"author"
+					],
+					"query": [
+						{
+							"key": "author",
+							"value": "author-1"
+						},
+						{
+							"key": "expand",
+							"value": "authors,categories"
+						}
+					]
+				},
+				"description": "Buscar aquellos libros donde participó X autor haciendo match ya sea con su nombre o apellidos"
+			},
+			"response": []
+		},
+		{
+			"name": "4. Books by price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/price?priceMin=300&priceMax=600",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						"price"
+					],
+					"query": [
+						{
+							"key": "priceMin",
+							"value": "300"
+						},
+						{
+							"key": "priceMax",
+							"value": "600"
+						}
+					]
+				},
+				"description": "Donde el precio esté en el rango de precioMinimo a precioMáximo"
+			},
+			"response": []
+		},
+		{
+			"name": "5. Books with n authors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/authors?authors=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "authors",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Dado un número, buscar aquellos libros donde contengan ese  número de autores."
+			},
+			"response": []
+		},
+		{
+			"name": "6. Books by date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/datePublication?startDate=1650-04-01&endDate=1800-05-01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						"datePublication"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "1650-04-01"
+						},
+						{
+							"key": "endDate",
+							"value": "1800-05-01"
+						}
+					]
+				},
+				"description": "Buscar aquellos libros en un rango de fechas (fechaInicial, fechaFinal) de publicación"
+			},
+			"response": []
+		},
+		{
+			"name": "7. Amount of books by category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/amountByCategory?category=drama",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						"amountByCategory"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "drama"
+						}
+					]
+				},
+				"description": "Número de libros que existe de x categoría"
+			},
+			"response": []
+		},
+		{
+			"name": "8. Books by category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/category?category=Arte",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						"category"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Arte"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Filtrar los libros por categoría."
+			},
+			"response": []
+		},
+		{
+			"name": "9A. Order by pages ascendant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book?limit=2&offset=0&sortField=pages&sortingOrder=ASC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "sortField",
+							"value": "pages"
+						},
+						{
+							"key": "sortingOrder",
+							"value": "ASC"
+						}
+					]
+				},
+				"description": "Filtrar libros ascendente por número de páginas que contiene el libro."
+			},
+			"response": []
+		},
+		{
+			"name": "9B. Order by pages descendant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book?limit=2&offset=0&sortingOrder=DESC&sortField=pages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "sortingOrder",
+							"value": "DESC"
+						},
+						{
+							"key": "sortField",
+							"value": "pages"
+						}
+					]
+				},
+				"description": "Filtrar libros descendente por número de páginas que contiene el libro."
+			},
+			"response": []
+		},
+		{
+			"name": "Extra. Books with ranking",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"title test updated2\",\r\n    \"pages\": 800,\r\n    \"isbn\": \"7766-0543-1\",\r\n    \"price\": 597.99,\r\n    \"summary\": \"summary 1\",\r\n    \"editorial\": \"Editorial test\",\r\n    \"datePublication\": \"1995-08-04T06:00:00.000+0000\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/blank-api/book/ranking?limit=5&offset=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blank-api",
+						"book",
+						"ranking"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "offset",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Get books with its ranking"
+			},
+			"response": []
+		}
+	]
+}

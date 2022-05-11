@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <category id="1" name="Terror"/>
+    <category id="2" name="Drama"/>
+    <category id="3" name="Ficcion"/>
+    <category id="4" name="lirico"/>
+    <category id="5" name="Autoayuda"/>
+
+    <author id="1" name="author-1" first_name="fn-1" second_name="sn-1" birthday="1955-05-13"/>
+    <author id="2" name="author-2" first_name="fn-2" second_name="sn-2" birthday="1945-08-13"/>
+    <author id="3" name="author-3" first_name="fn-3" second_name="sn-3" birthday="1968-01-12"/>
+    <author id="4" name="author-4" first_name="fn-4" second_name="sn-4" birthday="1975-09-01"/>
+    <author id="5" name="author-5" first_name="fn-5" second_name="sn-5" birthday="1985-04-13"/>
+    <author id="6" name="author-6" first_name="fn-6" second_name="sn-6" birthday="1979-08-03"/>
+
+
+    <book id="1" title="title 1" pages="215" isbn="7766-0543-1" price="500" summary="details_1" editorial="editorial-1" release_date="1975-01-01" deleted="false"/>
+    <book id="2" title="title 2" pages="192" isbn="7766-0543-2" price="600" summary="details_2" editorial="editorial-2" release_date="1970-03-16" deleted="false"/>
+    <book id="3" title="title 3" pages="624" isbn="7766-0543-3" price="300.25" summary="details_3" editorial="editorial-3" release_date="1976-05-22" deleted="false"/>
+    <book id="4" title="title 4" pages="423" isbn="7766-0543-4" price="800.50" summary="details_4" editorial="editorial-4" release_date="1972-02-14" deleted="false"/>
+
+    <book_author book_id="1" author_id="1"/>
+    <book_author book_id="2" author_id="1"/>
+    <book_author book_id="3" author_id="2"/>
+    <book_author book_id="1" author_id="3"/>
+    
+    <book_category book_id="1" category_id="1"/>
+    <book_category book_id="2" category_id="2"/>
+    <book_category book_id="3" category_id="1"/>
+    <book_category book_id="4" category_id="2"/>
+
+    <ranking id="1" score="5" book_id="1"/>
+    <ranking id="2" score="4" book_id="1"/>
+    <ranking id="3" score="4" book_id="2"/>
+    <ranking id="4" score="3" book_id="3"/>
+    <ranking id="5" score="2" book_id="4"/>
+
+</dataset>
