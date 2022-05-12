@@ -12,48 +12,48 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import mx.dev.blank.entity.Book;
 import mx.dev.blank.entity.Book_;
-import mx.dev.blank.entity.Category;
+import mx.dev.blank.entity.Product;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class CategoryJpaDAO implements CategoryDAO {
+public class ProductJpaDAO implements ProductDAO {
 
   @Setter(onMethod = @__(@PersistenceContext), value = AccessLevel.PACKAGE)
   private EntityManager em;
 
   /* create */
   @Override
-  public void create(final Category category) {
-    em.persist(category);
+  public void create(final Product product) {
+    em.persist(product);
   }
 
   /* update */
   @Override
-  public void update(final Category category) {
-    em.merge(category);
+  public void update(final Product product) {
+    em.merge(product);
   }
 
   /* Delete */
   @Override
-  public void delete(final Category category) {
-    em.remove(category);
+  public void delete(final Product product) {
+    em.remove(product);
   }
 
   /* Select * FROM category WHERE id = ? */
   @Override
-  public Category findById(final int id) {
-    return em.find(Category.class, id);
+  public Product findById(final int id) {
+    return em.find(Product.class, id);
   }
 
   @Override
-  public List<Category> findByBookId(final int bookId) {
+  public List<Product> findBySaleId(final int bookId) {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Category> query = builder.createQuery(Category.class);
+    final CriteriaQuery<Product> query = builder.createQuery(Product.class);
     final Root<Book> root = query.from(Book.class);
 
-    final Join<Book, Category> categoryJoin = root.join(Book_.categories);
+    final Join<Book, Product> categoryJoin = root.join(Book_.categories);
 
     query.select(categoryJoin).where(builder.equal(root.get(Book_.id), bookId));
 
@@ -62,11 +62,11 @@ public class CategoryJpaDAO implements CategoryDAO {
 
   /* SELECT * FROM category */
   @Override
-  public List<Category> findAll() {
+  public List<Product> findAll() {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Category> query = builder.createQuery(Category.class);
-    final Root<Category> root = query.from(Category.class);
+    final CriteriaQuery<Product> query = builder.createQuery(Product.class);
+    final Root<Product> root = query.from(Product.class);
 
     query.select(root);
 

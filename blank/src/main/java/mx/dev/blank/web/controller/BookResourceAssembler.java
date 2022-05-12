@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import mx.dev.blank.entity.User;
 import mx.dev.blank.entity.Book;
-import mx.dev.blank.entity.Category;
+import mx.dev.blank.entity.Product;
 import mx.dev.blank.model.UserDTO;
 import mx.dev.blank.model.BookDTO;
-import mx.dev.blank.model.CategoryDTO;
+import mx.dev.blank.model.ProductDTO;
 import mx.dev.blank.service.UserService;
 import mx.dev.blank.service.CategoryService;
 import org.springframework.stereotype.Component;
@@ -61,12 +61,20 @@ public class BookResourceAssembler {
     }
 
     if (expand.contains(CATEGORY_EXPAND)) {
-      final List<Category> categories = categoryService.findByBookId(book.getId());
+      final List<Product> categories = categoryService.findByBookId(book.getId());
       dto.addCategories(
           categories.stream()
               .map(
-                  category -> {
-                    return new CategoryDTO(category.getId(), category.getName());
+                  product -> {
+                    return new ProductDTO(
+                            product.getId(),
+                            product.getProductName(),
+                            product.getProductCode(),
+                            product.getProductBrand(),
+                            product.getProductExpirationDate(),
+                            product.getProductPrice(),
+                            product.getProductCost(),
+                            product.getProductQuantity());
                   })
               .collect(Collectors.toSet()));
     }

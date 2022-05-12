@@ -2,10 +2,9 @@ package mx.dev.blank.web.controller;
 
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mx.dev.blank.entity.Category;
-import mx.dev.blank.model.CategoryDTO;
+import mx.dev.blank.model.ProductDTO;
 import mx.dev.blank.service.CategoryService;
-import mx.dev.blank.web.request.CategoryRequest;
+import mx.dev.blank.web.request.ProductRequest;
 import mx.dev.blank.web.response.BaseResponse;
 import mx.dev.blank.web.response.CategoryResponse;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +23,13 @@ public class CategoryRestController {
 
   @PostMapping
   public ResponseEntity<BaseResponse> createCategory(
-      @Valid @RequestBody final CategoryRequest categoryRequest, final BindingResult errors) {
+          @Valid @RequestBody final ProductRequest productRequest, final BindingResult errors) {
 
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(BaseResponse.fail(errors.getAllErrors()));
     }
 
-    categoryService.createCategory(categoryRequest);
+    categoryService.createCategory(productRequest);
 
     return ResponseEntity.ok(BaseResponse.success("Category created successfully"));
   }
@@ -38,14 +37,14 @@ public class CategoryRestController {
   @PutMapping(path = "/{categoryId}")
   public ResponseEntity<BaseResponse> updateCategory(
       @PathVariable(name = "categoryId") final int categoryId,
-      @Valid @RequestBody final CategoryRequest categoryRequest,
+      @Valid @RequestBody final ProductRequest productRequest,
       final BindingResult errors) {
 
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(BaseResponse.fail(errors.getAllErrors()));
     }
 
-    categoryService.updateCategory(categoryId, categoryRequest);
+    categoryService.updateCategory(categoryId, productRequest);
 
     return ResponseEntity.ok(BaseResponse.success("Category updated successfully"));
   }
@@ -61,7 +60,7 @@ public class CategoryRestController {
   @GetMapping(path = "/list")
   public ResponseEntity<CategoryResponse> getCategory() {
 
-    final List<CategoryDTO> retrieved = categoryService.findAll();
+    final List<ProductDTO> retrieved = categoryService.findAll();
 
     return ResponseEntity.ok(new CategoryResponse(retrieved));
   }
