@@ -1,52 +1,57 @@
-CREATE TABLE category(
+CREATE TABLE product(
                          id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                         name varchar(50) NOT NULL,
+                         product_name varchar(50) NOT NULL,
+                         product_code int(11) NOT NULL,
+                         product_brand varchar(50) NOT NULL,
+                         product_expiration_date DATE NOT NULL,
+                         product_price int(11) NOT NULL,
+                         product_cost int(11) NOT NULL,
+                         product_quantity int(11) NOT NULL,
+                         deleted boolean NOT NULL,
                          PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 
-CREATE TABLE book(
+CREATE TABLE sale(
                      id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                     title varchar(50) NOT NULL,
-                     pages int(10) NOT NULL,
-                     isbn varchar(13) NOT NULL,
-                     price decimal(6,2) NOT NULL,
-                     summary varchar(350) NOT NULL,
-                     editorial varchar(35) NOT NULL,
-                     release_date Date NOT NULL,
+                     sale_date varchar(50) NOT NULL,
+                     sale_quantity int(10) NOT NULL,
                      deleted boolean NOT NULL,
                      PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
-CREATE TABLE author(
-                       id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                       name varchar(50) NOT NULL,
-                       first_name varchar(50) NOT NULL,
-                       second_name varchar(50) NOT NULL,
-                       birthday date,
+CREATE TABLE user(
+                        id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+                        username varchar(50) NOT NULL,
+                        name varchar(50) NOT NULL,
+                        first_surname varchar(50) NOT NULL,
+                        second_surname varchar(50) NOT NULL,
+                        address varchar(50) NOT NULL,
+                        phone_number int(11) NOT NULL,
+                        password varchar(18) NOT NULL,
+                        deleted boolean NOT NULL,
                        PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
-CREATE TABLE book_author(
-                            book_id int(10)  UNSIGNED NOT NULL,
-                            author_id int(10)  UNSIGNED NOT NULL,
-                            PRIMARY KEY (book_id, author_id),
-                            CONSTRAINT book_author_book_id_fk FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE ON UPDATE CASCADE,
-                            CONSTRAINT book_author_author_id_fk FOREIGN KEY (author_id) REFERENCES author (id) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE sale_user(
+                            sale_id int(10)  UNSIGNED NOT NULL,
+                            user_id int(10)  UNSIGNED NOT NULL,
+                            PRIMARY KEY (sale_id, user_id),
+                            CONSTRAINT sale_user_sale_id_fk FOREIGN KEY (sale_id) REFERENCES sale (id) ON DELETE CASCADE ON UPDATE CASCADE,
+                            CONSTRAINT sale_user_user_id_fk FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB;
 
-CREATE TABLE book_category(
-                            book_id int(10)  UNSIGNED NOT NULL,
-                            category_id int(10)  UNSIGNED NOT NULL,
+CREATE TABLE sale_product(
+                            sale_id int(10)  UNSIGNED NOT NULL,
+                            product_id int(10)  UNSIGNED NOT NULL,
                             PRIMARY KEY (book_id, category_id),
-                            CONSTRAINT book_category_book_id_fk FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE ON UPDATE CASCADE,
-                            CONSTRAINT book_category_category_id_fk FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE ON UPDATE CASCADE
+                            CONSTRAINT sale_product_sale_id_fk FOREIGN KEY (sale_id) REFERENCES sale (id) ON DELETE CASCADE ON UPDATE CASCADE,
+                            CONSTRAINT sale_product_product_id_fk FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB;
 
-CREATE TABLE ranking(
+CREATE TABLE provider(
                         id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                        score int(1) NOT NULL,
-                        book_id int(10) UNSIGNED NOT NULL,
-                        CONSTRAINT ranking_book_id_fk FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE ON UPDATE CASCADE,
+                        provider_name varchar(50) NOT NULL,
+                        provider_rfc int(13) UNSIGNED NOT NULL,
                         PRIMARY KEY (id)
 )ENGINE=InnoDB;
