@@ -7,12 +7,12 @@
     <category id="4" name="lirico"/>
     <category id="5" name="Autoayuda"/>
 
-    <author id="1" name="author-1" first_name="fn-1" second_name="sn-1" birthday="1955-05-13"/>
-    <author id="2" name="author-2" first_name="fn-2" second_name="sn-2" birthday="1945-08-13"/>
-    <author id="3" name="author-3" first_name="fn-3" second_name="sn-3" birthday="1968-01-12"/>
-    <author id="4" name="author-4" first_name="fn-4" second_name="sn-4" birthday="1975-09-01"/>
-    <author id="5" name="author-5" first_name="fn-5" second_name="sn-5" birthday="1985-04-13"/>
-    <author id="6" name="author-6" first_name="fn-6" second_name="sn-6" birthday="1979-08-03"/>
+    <user id="1" name="user-1" first_name="fn-1" second_name="sn-1" birthday="1955-05-13"/>
+    <user id="2" name="user-2" first_name="fn-2" second_name="sn-2" birthday="1945-08-13"/>
+    <user id="3" name="user-3" first_name="fn-3" second_name="sn-3" birthday="1968-01-12"/>
+    <user id="4" name="user-4" first_name="fn-4" second_name="sn-4" birthday="1975-09-01"/>
+    <user id="5" name="user-5" first_name="fn-5" second_name="sn-5" birthday="1985-04-13"/>
+    <user id="6" name="user-6" first_name="fn-6" second_name="sn-6" birthday="1979-08-03"/>
 
 
     <book id="1" title="title 1" pages="215" isbn="7766-0543-1" price="500" summary="details_1" editorial="editorial-1" release_date="1975-01-01" deleted="false"/>

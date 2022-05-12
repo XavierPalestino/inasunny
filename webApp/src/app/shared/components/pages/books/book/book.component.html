@@ -37,8 +37,8 @@
                     <mat-error *ngIf="form.controls['datePublication'].errors?.required">This field is mandatory or insert invalid date format</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select formControlName="authors" ma placeholder="Authors" multiple>
-                        <mat-option *ngFor="let authors of authorsList" value="{{authors?.id}}">{{authors?.name}} {{authors?.firstName}}</mat-option>
+                    <mat-select formControlName="users" ma placeholder="Authors" multiple>
+                        <mat-option *ngFor="let users of authorsList" value="{{users?.id}}">{{users?.name}} {{users?.firstName}}</mat-option>
                     </mat-select>
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>

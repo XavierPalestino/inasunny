@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import mx.dev.blank.dao.AuthorDAO;
+import mx.dev.blank.dao.UserDAO;
 import mx.dev.blank.dao.BookDAO;
 import mx.dev.blank.dao.CategoryDAO;
-import mx.dev.blank.entity.Author;
+import mx.dev.blank.entity.User;
 import mx.dev.blank.entity.Book;
 import mx.dev.blank.entity.Category;
 import mx.dev.blank.exception.ResourceNotFoundException;
@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookService {
 
   private final BookDAO bookDAO;
-  private final AuthorDAO authorDAO;
+  private final UserDAO userDAO;
   private final CategoryDAO categoryDAO;
 
   /*CRUD*/
@@ -34,7 +34,7 @@ public class BookService {
   public Book createBook(final BookRequest request) {
 
     final Set<Category> categories = getCategories(request.getCategories());
-    final Set<Author> authors = getAuthors(request.getAuthors());
+    final Set<User> users = getAuthors(request.getAuthors());
 
     final Book book =
         Book.createNewBook(
@@ -46,7 +46,7 @@ public class BookService {
             request.getEditorial(),
             request.getDatePublication(),
             categories,
-            authors);
+                users);
 
     bookDAO.create(book);
     return book;
@@ -61,9 +61,9 @@ public class BookService {
     }
 
     final Set<Category> categories = getCategories(request.getCategories());
-    final Set<Author> authors = getAuthors(request.getAuthors());
+    final Set<User> users = getAuthors(request.getAuthors());
 
-    book.update(request, categories, authors);
+    book.update(request, categories, users);
 
     bookDAO.update(book);
   }
@@ -79,18 +79,18 @@ public class BookService {
     bookDAO.softDelete(book);
   }
 
-  private Set<Author> getAuthors(final Set<Integer> authorIds) {
-    final Set<Author> authors = new HashSet<>();
+  private Set<User> getAuthors(final Set<Integer> authorIds) {
+    final Set<User> users = new HashSet<>();
     authorIds.forEach(
         authorId -> {
-          final Author author = authorDAO.findById(authorId);
-          if (author == null) {
+          final User user = userDAO.findById(authorId);
+          if (user == null) {
             throw new ResourceNotFoundException("Author not found: " + authorId);
           }
-          authors.add(author);
+          users.add(user);
         });
 
-    return authors;
+    return users;
   }
 
   private Set<Category> getCategories(final Set<Integer> categoryIds) {
@@ -155,8 +155,8 @@ public class BookService {
   }
 
   @Transactional(readOnly = true)
-  public Author findByAuthorId(final int authorId) {
-    return authorDAO.findById(authorId);
+  public User findByAuthorId(final int authorId) {
+    return userDAO.findById(authorId);
   }
 
   @Transactional(readOnly = true)

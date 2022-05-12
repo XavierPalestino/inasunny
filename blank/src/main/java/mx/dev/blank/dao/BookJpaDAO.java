@@ -122,14 +122,14 @@ public class BookJpaDAO implements BookDAO {
     final CriteriaQuery<Book> query = builder.createQuery(Book.class);
     final Root<Book> root = query.from(Book.class);
 
-    final Join<Book, Author> authorJoin = root.join(Book_.authors);
+    final Join<Book, User> authorJoin = root.join(Book_.users);
     query
         .select(root)
         .where(
             builder.or(
-                builder.equal(authorJoin.get(Author_.name), author),
-                builder.equal(authorJoin.get(Author_.firstName), author),
-                builder.equal(authorJoin.get(Author_.secondName), author)));
+                builder.equal(authorJoin.get(User_.name), author),
+                builder.equal(authorJoin.get(User_.firstSurname), author),
+                builder.equal(authorJoin.get(User_.secondSurname), author)));
 
     return em.createQuery(query).getResultList();
   }
@@ -168,7 +168,7 @@ public class BookJpaDAO implements BookDAO {
     final CriteriaQuery<Integer> query = builder.createQuery(Integer.class);
     final Root<Book> root = query.from(Book.class);
 
-    final Join<Book, Author> authorJoin = root.join(Book_.authors);
+    final Join<Book, User> authorJoin = root.join(Book_.users);
 
     query
         .select(root.get(Book_.id))

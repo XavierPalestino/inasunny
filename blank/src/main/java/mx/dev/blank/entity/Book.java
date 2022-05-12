@@ -41,7 +41,7 @@ public class Book implements Serializable {
       final String editorial,
       final Date releaseDate,
       final Set<Category> categories,
-      final Set<Author> authors) {
+      final Set<User> users) {
     this.title = title;
     this.pages = pages;
     this.isbn = isbn;
@@ -50,7 +50,7 @@ public class Book implements Serializable {
     this.editorial = editorial;
     this.releaseDate = releaseDate;
     this.categories.addAll(categories);
-    this.authors.addAll(authors);
+    this.users.addAll(users);
   }
 
   public static Book createNewBook(
@@ -62,13 +62,13 @@ public class Book implements Serializable {
       final String editorial,
       final Date datePublication,
       final Set<Category> categories,
-      final Set<Author> authors) {
+      final Set<User> users) {
     return new Book(
-        title, pages, isbn, price, summary, editorial, datePublication, categories, authors);
+        title, pages, isbn, price, summary, editorial, datePublication, categories, users);
   }
 
   public void update(
-      final BookRequest request, final Set<Category> categories, final Set<Author> authors) {
+      final BookRequest request, final Set<Category> categories, final Set<User> users) {
     this.title = request.getTitle();
     this.pages = request.getPages();
     this.isbn = request.getIsbn();
@@ -78,8 +78,8 @@ public class Book implements Serializable {
     this.releaseDate = request.getDatePublication();
     this.categories.clear();
     this.categories.addAll(categories);
-    this.authors.clear();
-    this.authors.addAll(authors);
+    this.users.clear();
+    this.users.addAll(users);
   }
 
   public void markAsDeleted() {
@@ -127,5 +127,5 @@ public class Book implements Serializable {
       name = "book_author",
       joinColumns = {@JoinColumn(name = "book_id", nullable = false, updatable = false)},
       inverseJoinColumns = {@JoinColumn(name = "author_id", nullable = false, updatable = false)})
-  private final Set<Author> authors = new HashSet<>();
+  private final Set<User> users = new HashSet<>();
 }
