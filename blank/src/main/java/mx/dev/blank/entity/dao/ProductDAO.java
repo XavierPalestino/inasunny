@@ -1,4 +1,4 @@
-package mx.dev.blank.dao;
+package mx.dev.blank.entity.dao;
 
 import java.util.List;
 import javax.validation.constraints.Min;

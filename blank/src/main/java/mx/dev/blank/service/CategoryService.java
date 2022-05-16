@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
-import mx.dev.blank.dao.ProductDAO;
+import mx.dev.blank.entity.dao.ProductDAO;
 import mx.dev.blank.entity.Product;
 import mx.dev.blank.exception.ResourceNotFoundException;
 import mx.dev.blank.model.ProductDTO;

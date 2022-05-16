@@ -1,4 +1,4 @@
-package mx.dev.blank.dao;
+package mx.dev.blank.entity.dao;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,49 +11,48 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import mx.dev.blank.entity.*;
-import mx.dev.blank.model.BookRankingDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class BookJpaDAO implements BookDAO {
+public class SaleJpaDAO implements SaleDAO {
 
   @Setter(onMethod = @__(@PersistenceContext), value = AccessLevel.PACKAGE)
   private EntityManager em;
 
   /* create */
   @Override
-  public void create(final Book book) {
-    em.persist(book);
+  public void create(final Sale sale) {
+    em.persist(sale);
   }
 
   /* update */
   @Override
-  public void update(final Book book) {
-    em.merge(book);
+  public void update(final Sale sale) {
+    em.merge(sale);
   }
 
   /* Delete */
   @Override
-  public void softDelete(final Book book) {
-    em.merge(book);
+  public void softDelete(final Sale sale) {
+    em.merge(sale);
   }
 
   /* Select * FROM books WHERE id = ? */
   @Override
-  public Book findById(final int id) {
-    return em.find(Book.class, id);
+  public Sale findById(final int id) {
+    return em.find(Sale.class, id);
   }
 
   /* Select * FROM books WHERE id in ? */
   @Override
-  public List<Book> findByIds(final List<Integer> ids) {
+  public List<Sale> findByIds(final List<Integer> ids) {
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Book> query = builder.createQuery(Book.class);
-    final Root<Book> root = query.from(Book.class);
+    final CriteriaQuery<Sale> query = builder.createQuery(Sale.class);
+    final Root<Sale> root = query.from(Sale.class);
 
-    query.select(root).where(root.get(Book_.id).in(ids));
+    query.select(root).where(root.get(Sale_.id).in(ids));
 
     return em.createQuery(query).getResultList();
   }
@@ -66,11 +65,11 @@ public class BookJpaDAO implements BookDAO {
    *
    * */
   @Override
-  public List<Book> findBooks(
+  public List<Sale> findBooks(
       final String sortField, final SortingOrder order, final Integer limit, final Integer offset) {
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Book> query = builder.createQuery(Book.class);
-    final Root<Book> root = query.from(Book.class);
+    final CriteriaQuery<Sale> query = builder.createQuery(Sale.class);
+    final Root<Sale> root = query.from(Sale.class);
 
     if (StringUtils.isNotBlank(sortField)) {
       final Path<?> sortFieldValue = getSortField(root, sortField);
@@ -81,7 +80,7 @@ public class BookJpaDAO implements BookDAO {
       }
     }
 
-    final TypedQuery<Book> typedQuery = em.createQuery(query);
+    final TypedQuery<Sale> typedQuery = em.createQuery(query);
 
     if (offset != null) {
       typedQuery.setFirstResult(offset);
@@ -94,16 +93,14 @@ public class BookJpaDAO implements BookDAO {
     return typedQuery.getResultList();
   }
 
-  private Path<?> getSortField(final Root<Book> root, final String sortField) {
+  private Path<?> getSortField(final Root<Sale> root, final String sortField) {
     switch (sortField) {
-      case "title":
-        return root.get(Book_.title);
-      case "pages":
-        return root.get(Book_.pages);
-      case "releaseDate":
-        return root.get(Book_.releaseDate);
+      case "saleQuantity":
+        return root.get(Sale_.saleQuantity);
+      case "saleDate":
+        return root.get(Sale_.releaseDate);
       default:
-        return root.get(Book_.id);
+        return root.get(Sale_.id);
     }
   }
 
@@ -117,12 +114,12 @@ public class BookJpaDAO implements BookDAO {
    *
    * */
   @Override
-  public List<Book> getBookByAuthor(final String author) {
+  public List<Sale> getBookByAuthor(final String author) {
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Book> query = builder.createQuery(Book.class);
-    final Root<Book> root = query.from(Book.class);
+    final CriteriaQuery<Sale> query = builder.createQuery(Sale.class);
+    final Root<Sale> root = query.from(Sale.class);
 
-    final Join<Book, User> authorJoin = root.join(Book_.users);
+    final Join<Sale, User> authorJoin = root.join(Sale_.users);
     query
         .select(root)
         .where(
@@ -140,13 +137,11 @@ public class BookJpaDAO implements BookDAO {
    *
    * */
   @Override
-  public List<Book> getBooksByPrice(final BigDecimal priceMin, final BigDecimal priceMax) {
+  public List<Sale> getBooksByPrice(final BigDecimal priceMin, final BigDecimal priceMax) {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Book> query = builder.createQuery(Book.class);
-    final Root<Book> root = query.from(Book.class);
-
-    query.select(root).where(builder.between(root.get(Book_.price), priceMin, priceMax));
+    final CriteriaQuery<Sale> query = builder.createQuery(Sale.class);
+    final Root<Sale> root = query.from(Sale.class);
 
     return em.createQuery(query).getResultList();
   }
@@ -166,13 +161,13 @@ public class BookJpaDAO implements BookDAO {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
     final CriteriaQuery<Integer> query = builder.createQuery(Integer.class);
-    final Root<Book> root = query.from(Book.class);
+    final Root<Sale> root = query.from(Sale.class);
 
-    final Join<Book, User> authorJoin = root.join(Book_.users);
+    final Join<Sale, User> authorJoin = root.join(Sale_.users);
 
     query
-        .select(root.get(Book_.id))
-        .groupBy(root.get(Book_.id))
+        .select(root.get(Sale_.id))
+        .groupBy(root.get(Sale_.id))
         .having(builder.equal(builder.count(authorJoin), authors));
 
     return em.createQuery(query).getResultList();
@@ -185,13 +180,13 @@ public class BookJpaDAO implements BookDAO {
    * */
 
   @Override
-  public List<Book> getBooksByDate(final Date startDate, final Date endDate) {
+  public List<Sale> getBooksByDate(final Date startDate, final Date endDate) {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Book> query = builder.createQuery(Book.class);
-    final Root<Book> root = query.from(Book.class);
+    final CriteriaQuery<Sale> query = builder.createQuery(Sale.class);
+    final Root<Sale> root = query.from(Sale.class);
 
-    query.select(root).where(builder.between(root.get(Book_.releaseDate), startDate, endDate));
+    query.select(root).where(builder.between(root.get(Sale_.releaseDate), startDate, endDate));
 
     return em.createQuery(query).getResultList();
   }
@@ -208,11 +203,11 @@ public class BookJpaDAO implements BookDAO {
   public Long getAmountOfBooksByCategory(final String product) {
     final CriteriaBuilder builder = em.getCriteriaBuilder();
     final CriteriaQuery<Long> query = builder.createQuery(Long.class);
-    final Root<Book> root = query.from(Book.class);
-    final Join<Book, Product> categoryJoin = root.join(Book_.categories);
+    final Root<Sale> root = query.from(Sale.class);
+    final Join<Sale, Product> categoryJoin = root.join(Sale_.products);
 
     query
-        .select(builder.count(root.get(Book_.id)))
+        .select(builder.count(root.get(Sale_.id)))
         .where(builder.equal(categoryJoin.get(Product_.productName), product));
     return em.createQuery(query).getSingleResult();
   }
@@ -226,12 +221,12 @@ public class BookJpaDAO implements BookDAO {
    *
    * */
   @Override
-  public List<Book> getBooksByCategory(final String product) {
+  public List<Sale> getBooksByCategory(final String product) {
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Book> query = builder.createQuery(Book.class);
-    final Root<Book> root = query.from(Book.class);
+    final CriteriaQuery<Sale> query = builder.createQuery(Sale.class);
+    final Root<Sale> root = query.from(Sale.class);
 
-    final Join<Book, Product> bookJoinCategory = root.join(Book_.categories);
+    final Join<Sale, Product> bookJoinCategory = root.join(Sale_.products);
 
     query.select(root).where(builder.equal(bookJoinCategory.get(Product_.productName), product));
 

@@ -26,18 +26,18 @@ public class Ranking implements Serializable {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "book_id", nullable = false)
-  private Book book;
+  private Sale sale;
 
   @Column(name = "book_id", updatable = false, insertable = false)
   private int bookId;
 
-  public static Ranking newRanking(final int score, final Book book) {
-    return new Ranking(score, book);
+  public static Ranking newRanking(final int score, final Sale sale) {
+    return new Ranking(score, sale);
   }
 
-  private Ranking(final int score, final Book book) {
+  private Ranking(final int score, final Sale sale) {
     this.score = score;
-    this.book = book;
-    this.bookId = book.getId();
+    this.sale = sale;
+    this.bookId = sale.getId();
   }
 }

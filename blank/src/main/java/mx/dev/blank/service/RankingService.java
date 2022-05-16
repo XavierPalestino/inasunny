@@ -1,9 +1,9 @@
 package mx.dev.blank.service;
 
 import lombok.RequiredArgsConstructor;
-import mx.dev.blank.dao.BookDAO;
-import mx.dev.blank.dao.RankingDAO;
-import mx.dev.blank.entity.Book;
+import mx.dev.blank.entity.dao.SaleDAO;
+import mx.dev.blank.entity.dao.RankingDAO;
+import mx.dev.blank.entity.Sale;
 import mx.dev.blank.entity.Ranking;
 import mx.dev.blank.exception.ResourceNotFoundException;
 import mx.dev.blank.web.request.RankingRequest;
@@ -15,19 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class RankingService {
 
   private final RankingDAO rankingDAO;
-  private final BookDAO bookDAO;
+  private final SaleDAO saleDAO;
 
   /*CRUD*/
 
   @Transactional
   public void createRanking(final RankingRequest request) {
 
-    final Book book = bookDAO.findById(request.getBookId());
-    if (book == null) {
+    final Sale sale = saleDAO.findById(request.getBookId());
+    if (sale == null) {
       throw new ResourceNotFoundException("Book not found: " + request.getBookId());
     }
 
-    final Ranking ranking = Ranking.newRanking(request.getScore(), book);
+    final Ranking ranking = Ranking.newRanking(request.getScore(), sale);
     rankingDAO.create(ranking);
   }
 }

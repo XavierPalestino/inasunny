@@ -1,4 +1,4 @@
-package mx.dev.blank.dao;
+package mx.dev.blank.entity.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -10,8 +10,8 @@ import javax.persistence.criteria.Root;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import mx.dev.blank.entity.Book;
-import mx.dev.blank.entity.Book_;
+import mx.dev.blank.entity.Sale;
+import mx.dev.blank.entity.Sale_;
 import mx.dev.blank.entity.Product;
 import org.springframework.stereotype.Repository;
 
@@ -47,15 +47,15 @@ public class ProductJpaDAO implements ProductDAO {
   }
 
   @Override
-  public List<Product> findBySaleId(final int bookId) {
+  public List<Product> findBySaleId(final int saleID) {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
     final CriteriaQuery<Product> query = builder.createQuery(Product.class);
-    final Root<Book> root = query.from(Book.class);
+    final Root<Sale> root = query.from(Sale.class);
 
-    final Join<Book, Product> categoryJoin = root.join(Book_.categories);
+    final Join<Sale, Product> categoryJoin = root.join(Sale_.products);
 
-    query.select(categoryJoin).where(builder.equal(root.get(Book_.id), bookId));
+    query.select(categoryJoin).where(builder.equal(root.get(Sale_.id), saleID));
 
     return em.createQuery(query).getResultList();
   }

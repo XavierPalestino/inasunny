@@ -1,4 +1,4 @@
-package mx.dev.blank.dao;
+package mx.dev.blank.entity.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -10,9 +10,9 @@ import javax.persistence.criteria.Root;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import mx.dev.blank.entity.Sale;
 import mx.dev.blank.entity.User;
-import mx.dev.blank.entity.Book;
-import mx.dev.blank.entity.Book_;
+import mx.dev.blank.entity.Sale_;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -51,11 +51,11 @@ public class UserJpaDAO implements UserDAO {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
     final CriteriaQuery<User> query = builder.createQuery(User.class);
-    final Root<Book> root = query.from(Book.class);
+    final Root<Sale> root = query.from(Sale.class);
 
-    final Join<Book, User> authorJoin = root.join(Book_.users);
+    final Join<Sale, User> authorJoin = root.join(Sale_.users);
 
-    query.select(authorJoin).where(builder.equal(root.get(Book_.id), bookId));
+    query.select(authorJoin).where(builder.equal(root.get(Sale_.id), bookId));
 
     return em.createQuery(query).getResultList();
   }

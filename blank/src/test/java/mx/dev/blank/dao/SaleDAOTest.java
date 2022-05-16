@@ -11,8 +11,9 @@ import java.util.Date;
 import java.util.List;
 import mx.dev.blank.DAOTestConfig;
 import mx.dev.blank.DBTestConfig;
-import mx.dev.blank.entity.Book;
+import mx.dev.blank.entity.Sale;
 import mx.dev.blank.entity.SortingOrder;
+import mx.dev.blank.entity.dao.SaleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -26,11 +27,11 @@ import org.testng.annotations.Test;
   DependencyInjectionTestExecutionListener.class,
   DbUnitTestExecutionListener.class
 })
-public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
+public class SaleDAOTest extends AbstractTransactionalTestNGSpringContextTests {
 
   private static final String DBUNIT_XML = "classpath:dbunit/dao/book.xml";
 
-  @Autowired private BookDAO bookDAO;
+  @Autowired private SaleDAO saleDAO;
 
   @DataProvider
   Object[][] findById_dataProvider() {
@@ -44,13 +45,13 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
   @DatabaseSetup(DBUNIT_XML)
   public void findById_should_return_book(
       final String testCase, final int bookId, final Integer expectedId) {
-    final Book book = bookDAO.findById(bookId);
+    final Sale sale = saleDAO.findById(bookId);
 
     if (expectedId == null) {
-      assertThat(book).isNull();
+      assertThat(sale).isNull();
     } else {
-      assertThat(book).isNotNull();
-      assertThat(book.getId()).isEqualTo(expectedId);
+      assertThat(sale).isNotNull();
+      assertThat(sale.getId()).isEqualTo(expectedId);
     }
   }
 
@@ -66,11 +67,11 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
   @DatabaseSetup(DBUNIT_XML)
   public void findByIds_should_return_book(
       final String testCase, final List<Integer> bookIds, final List<Integer> expectedIds) {
-    final List<Book> books = bookDAO.findByIds(bookIds);
+    final List<Sale> sales = saleDAO.findByIds(bookIds);
 
-    assertThat(books)
+    assertThat(sales)
         .hasSameSizeAs(expectedIds)
-        .extracting(Book::getId)
+        .extracting(Sale::getId)
         .containsOnlyElementsOf(expectedIds);
   }
 
@@ -110,11 +111,11 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
       final Integer limit,
       final Integer offset,
       final List<Integer> expectedIds) {
-    final List<Book> books = bookDAO.findBooks(sortField, order, limit, offset);
+    final List<Sale> sales = saleDAO.findBooks(sortField, order, limit, offset);
 
-    assertThat(books)
+    assertThat(sales)
         .hasSameSizeAs(expectedIds)
-        .extracting(Book::getId)
+        .extracting(Sale::getId)
         .containsExactlyElementsOf(expectedIds);
   }
 
@@ -132,11 +133,11 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
   @DatabaseSetup(DBUNIT_XML)
   public void getBookByAuthor_should_return_book(
       final String testCase, final String filterText, final List<Integer> expectedIds) {
-    final List<Book> books = bookDAO.getBookByAuthor(filterText);
+    final List<Sale> sales = saleDAO.getBookByAuthor(filterText);
 
-    assertThat(books)
+    assertThat(sales)
         .hasSameSizeAs(expectedIds)
-        .extracting(Book::getId)
+        .extracting(Sale::getId)
         .containsOnlyElementsOf(expectedIds);
   }
 
@@ -155,11 +156,11 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
       final BigDecimal minPrice,
       final BigDecimal maxPrice,
       final List<Integer> expectedIds) {
-    final List<Book> books = bookDAO.getBooksByPrice(minPrice, maxPrice);
+    final List<Sale> sales = saleDAO.getBooksByPrice(minPrice, maxPrice);
 
-    assertThat(books)
+    assertThat(sales)
         .hasSameSizeAs(expectedIds)
-        .extracting(Book::getId)
+        .extracting(Sale::getId)
         .containsOnlyElementsOf(expectedIds);
   }
 
@@ -175,7 +176,7 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
   @DatabaseSetup(DBUNIT_XML)
   public void getBooksByAmountAuthors_should_return_number(
       final String testCase, final long numAuthors, final List<Integer> expectedIds) {
-    final List<Integer> bookIds = bookDAO.getBooksByAmountAuthors(numAuthors);
+    final List<Integer> bookIds = saleDAO.getBooksByAmountAuthors(numAuthors);
 
     assertThat(bookIds).hasSameSizeAs(expectedIds).containsOnlyElementsOf(expectedIds);
   }
@@ -202,11 +203,11 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
       final Date startDate,
       final Date endDate,
       final List<Integer> expectedIds) {
-    final List<Book> books = bookDAO.getBooksByDate(startDate, endDate);
+    final List<Sale> sales = saleDAO.getBooksByDate(startDate, endDate);
 
-    assertThat(books)
+    assertThat(sales)
         .hasSameSizeAs(expectedIds)
-        .extracting(Book::getId)
+        .extracting(Sale::getId)
         .containsOnlyElementsOf(expectedIds);
   }
 
@@ -222,7 +223,7 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
   @DatabaseSetup(DBUNIT_XML)
   public void getBooksByCategory_should_return_count(
       final String testCase, final String categoryName, final long expected) {
-    final long count = bookDAO.getAmountOfBooksByCategory(categoryName);
+    final long count = saleDAO.getAmountOfBooksByCategory(categoryName);
 
     assertThat(count).isEqualTo(expected);
   }
@@ -239,11 +240,11 @@ public class BookDAOTest extends AbstractTransactionalTestNGSpringContextTests {
   @DatabaseSetup(DBUNIT_XML)
   public void getBooksByCategory_should_return_books(
       final String testCase, final String categoryName, final List<Integer> expectedIds) {
-    final List<Book> books = bookDAO.getBooksByCategory(categoryName);
+    final List<Sale> sales = saleDAO.getBooksByCategory(categoryName);
 
-    assertThat(books)
+    assertThat(sales)
         .hasSameSizeAs(expectedIds)
-        .extracting(Book::getId)
+        .extracting(Sale::getId)
         .containsOnlyElementsOf(expectedIds);
   }
 }
