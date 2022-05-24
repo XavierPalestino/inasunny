@@ -27,7 +27,7 @@ public class BookDTO implements Serializable {
   private Set<UserDTO> authors = new HashSet<>();
 
   @JsonInclude(JsonInclude.Include.NON_EMPTY)
-  private Set<CategoryDTO> categories = new HashSet<>();
+  private Set<ProductDTO> categories = new HashSet<>();
 
   public BookDTO(final Book book) {
     this.id = book.getId();
@@ -44,7 +44,7 @@ public class BookDTO implements Serializable {
     this.authors.addAll(authors);
   }
 
-  public void addCategories(final Set<CategoryDTO> categories) {
+  public void addCategories(final Set<ProductDTO> categories) {
     this.categories.addAll(categories);
   }
 }

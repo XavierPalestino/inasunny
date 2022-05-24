@@ -205,15 +205,15 @@ public class BookJpaDAO implements BookDAO {
    *
    */
   @Override
-  public Long getAmountOfBooksByCategory(final String category) {
+  public Long getAmountOfBooksByCategory(final String product) {
     final CriteriaBuilder builder = em.getCriteriaBuilder();
     final CriteriaQuery<Long> query = builder.createQuery(Long.class);
     final Root<Book> root = query.from(Book.class);
-    final Join<Book, Category> categoryJoin = root.join(Book_.categories);
+    final Join<Book, Product> categoryJoin = root.join(Book_.categories);
 
     query
         .select(builder.count(root.get(Book_.id)))
-        .where(builder.equal(categoryJoin.get(Category_.name), category));
+        .where(builder.equal(categoryJoin.get(Product_.productName), product));
     return em.createQuery(query).getSingleResult();
   }
 
@@ -226,49 +226,16 @@ public class BookJpaDAO implements BookDAO {
    *
    * */
   @Override
-  public List<Book> getBooksByCategory(final String category) {
+  public List<Book> getBooksByCategory(final String product) {
     final CriteriaBuilder builder = em.getCriteriaBuilder();
     final CriteriaQuery<Book> query = builder.createQuery(Book.class);
     final Root<Book> root = query.from(Book.class);
 
-    final Join<Book, Category> bookJoinCategory = root.join(Book_.categories);
+    final Join<Book, Product> bookJoinCategory = root.join(Book_.categories);
 
-    query.select(root).where(builder.equal(bookJoinCategory.get(Category_.name), category));
+    query.select(root).where(builder.equal(bookJoinCategory.get(Product_.productName), product));
 
     return em.createQuery(query).getResultList();
   }
 
-  /* SELECT book.id, book.title, AVG(ranking.score) FROM ranking
-   * INNER JOIN book ON ranking.book_id = book.id
-   *
-   * Extra Ranking by book
-   *
-   * */
-
-  @Override
-  public List<BookRankingDTO> getRankings(final Integer limit, final Integer offset) {
-    final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<BookRankingDTO> query = builder.createQuery(BookRankingDTO.class);
-    final Root<Ranking> root = query.from(Ranking.class);
-    final Join<Ranking, Book> bookJoin = root.join(Ranking_.book);
-
-    query
-        .multiselect(
-            bookJoin.get(Book_.id),
-            bookJoin.get(Book_.title),
-            builder.avg(root.get(Ranking_.score)))
-        .groupBy(bookJoin.get(Book_.id), bookJoin.get(Book_.title));
-
-    final TypedQuery<BookRankingDTO> typedQuery = em.createQuery(query);
-
-    if (offset != null) {
-      typedQuery.setFirstResult(offset);
-    }
-
-    if (limit != null) {
-      typedQuery.setMaxResults(limit);
-    }
-
-    return typedQuery.getResultList();
-  }
 }

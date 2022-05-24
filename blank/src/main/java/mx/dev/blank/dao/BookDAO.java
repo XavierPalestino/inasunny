@@ -46,6 +46,4 @@ public interface BookDAO {
 
   // 8
   List<Book> getBooksByCategory(@NotBlank String category);
-
-  List<BookRankingDTO> getRankings(@Min(1) final Integer limit, @Min(0) final Integer offset);
 }

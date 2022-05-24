@@ -9,10 +9,10 @@ import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mx.dev.blank.dao.UserDAO;
 import mx.dev.blank.dao.BookDAO;
-import mx.dev.blank.dao.CategoryDAO;
+import mx.dev.blank.dao.ProductDAO;
+import mx.dev.blank.entity.Product;
 import mx.dev.blank.entity.User;
 import mx.dev.blank.entity.Book;
-import mx.dev.blank.entity.Category;
 import mx.dev.blank.exception.ResourceNotFoundException;
 import mx.dev.blank.model.BookRankingDTO;
 import mx.dev.blank.web.request.BookRequest;
@@ -26,14 +26,14 @@ public class BookService {
 
   private final BookDAO bookDAO;
   private final UserDAO userDAO;
-  private final CategoryDAO categoryDAO;
+  private final ProductDAO productDAO;
 
   /*CRUD*/
 
   @Transactional
   public Book createBook(final BookRequest request) {
 
-    final Set<Category> categories = getCategories(request.getCategories());
+    final Set<Product> categories = getCategories(request.getCategories());
     final Set<User> users = getAuthors(request.getAuthors());
 
     final Book book =
@@ -60,7 +60,7 @@ public class BookService {
       throw new ResourceNotFoundException("Book not found: " + bookId);
     }
 
-    final Set<Category> categories = getCategories(request.getCategories());
+    final Set<Product> categories = getCategories(request.getCategories());
     final Set<User> users = getAuthors(request.getAuthors());
 
     book.update(request, categories, users);
@@ -93,15 +93,15 @@ public class BookService {
     return users;
   }
 
-  private Set<Category> getCategories(final Set<Integer> categoryIds) {
-    final Set<Category> categories = new HashSet<>();
+  private Set<Product> getCategories(final Set<Integer> categoryIds) {
+    final Set<Product> categories = new HashSet<>();
     categoryIds.forEach(
         categoryId -> {
-          final Category category = categoryDAO.findById(categoryId);
-          if (category == null) {
+          final Product product = productDAO.findById(categoryId);
+          if (product == null) {
             throw new ResourceNotFoundException("Category not found: " + categoryId);
           }
-          categories.add(category);
+          categories.add(product);
         });
 
     return categories;
@@ -147,11 +147,6 @@ public class BookService {
   @Transactional(readOnly = true)
   public List<Book> getBooksByCategory(final String category) {
     return bookDAO.getBooksByCategory(category);
-  }
-
-  @Transactional(readOnly = true)
-  public List<BookRankingDTO> getBooksWithScore(final Integer limit, final Integer offset) {
-    return bookDAO.getRankings(limit, offset);
   }
 
   @Transactional(readOnly = true)

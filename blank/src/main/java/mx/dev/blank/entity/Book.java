@@ -40,7 +40,7 @@ public class Book implements Serializable {
       final String summary,
       final String editorial,
       final Date releaseDate,
-      final Set<Category> categories,
+      final Set<Product> categories,
       final Set<User> users) {
     this.title = title;
     this.pages = pages;
@@ -61,14 +61,14 @@ public class Book implements Serializable {
       final String summary,
       final String editorial,
       final Date datePublication,
-      final Set<Category> categories,
+      final Set<Product> categories,
       final Set<User> users) {
     return new Book(
         title, pages, isbn, price, summary, editorial, datePublication, categories, users);
   }
 
   public void update(
-      final BookRequest request, final Set<Category> categories, final Set<User> users) {
+          final BookRequest request, final Set<Product> categories, final Set<User> users) {
     this.title = request.getTitle();
     this.pages = request.getPages();
     this.isbn = request.getIsbn();
@@ -120,7 +120,7 @@ public class Book implements Serializable {
       name = "book_category",
       joinColumns = {@JoinColumn(name = "book_id", nullable = false, updatable = false)},
       inverseJoinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)})
-  private final Set<Category> categories = new HashSet<>();
+  private final Set<Product> categories = new HashSet<>();
 
   @ManyToMany
   @JoinTable(

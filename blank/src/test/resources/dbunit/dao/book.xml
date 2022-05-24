@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 
-    <category id="1" name="Terror"/>
-    <category id="2" name="Drama"/>
-    <category id="3" name="Ficcion"/>
-    <category id="4" name="lirico"/>
-    <category id="5" name="Autoayuda"/>
+    <product id="1" name="Terror"/>
+    <product id="2" name="Drama"/>
+    <product id="3" name="Ficcion"/>
+    <product id="4" name="lirico"/>
+    <product id="5" name="Autoayuda"/>
 
     <user id="1" name="user-1" first_name="fn-1" second_name="sn-1" birthday="1955-05-13"/>
     <user id="2" name="user-2" first_name="fn-2" second_name="sn-2" birthday="1945-08-13"/>

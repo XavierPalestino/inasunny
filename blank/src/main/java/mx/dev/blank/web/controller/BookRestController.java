@@ -181,14 +181,4 @@ public class BookRestController {
     final BookResourceAssembler assembler = assemblerFactory.create(expand);
     return ResponseEntity.ok(assembler.toDto(books));
   }
-
-  /*
-   * Extra
-   */
-  @GetMapping(value = "/ranking")
-  public ResponseEntity<List<BookRankingDTO>> getBooksWithScore(
-      @RequestParam Integer limit, @RequestParam(defaultValue = "0") int offset) {
-    final List<BookRankingDTO> books = bookService.getBooksWithScore(limit, offset);
-    return ResponseEntity.ok(books);
-  }
 }
