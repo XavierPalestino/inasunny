@@ -1,4 +1,4 @@
-package mx.dev.blank.dao;
+package mx.dev.blank.entity.dao;
 
 import javax.validation.constraints.NotNull;
 import mx.dev.blank.entity.Ranking;

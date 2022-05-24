@@ -15,10 +15,10 @@
     <user id="6" name="user-6" first_name="fn-6" second_name="sn-6" birthday="1979-08-03"/>
 
 
-    <book id="1" title="title 1" pages="215" isbn="7766-0543-1" price="500" summary="details_1" editorial="editorial-1" release_date="1975-01-01" deleted="false"/>
-    <book id="2" title="title 2" pages="192" isbn="7766-0543-2" price="600" summary="details_2" editorial="editorial-2" release_date="1970-03-16" deleted="false"/>
-    <book id="3" title="title 3" pages="624" isbn="7766-0543-3" price="300.25" summary="details_3" editorial="editorial-3" release_date="1976-05-22" deleted="false"/>
-    <book id="4" title="title 4" pages="423" isbn="7766-0543-4" price="800.50" summary="details_4" editorial="editorial-4" release_date="1972-02-14" deleted="false"/>
+    <sale id="1" title="title 1" pages="215" isbn="7766-0543-1" price="500" summary="details_1" editorial="editorial-1" release_date="1975-01-01" deleted="false"/>
+    <sale id="2" title="title 2" pages="192" isbn="7766-0543-2" price="600" summary="details_2" editorial="editorial-2" release_date="1970-03-16" deleted="false"/>
+    <sale id="3" title="title 3" pages="624" isbn="7766-0543-3" price="300.25" summary="details_3" editorial="editorial-3" release_date="1976-05-22" deleted="false"/>
+    <sale id="4" title="title 4" pages="423" isbn="7766-0543-4" price="800.50" summary="details_4" editorial="editorial-4" release_date="1972-02-14" deleted="false"/>
 
     <book_author book_id="1" author_id="1"/>
     <book_author book_id="2" author_id="1"/>

@@ -8,11 +8,10 @@ import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mx.dev.blank.entity.Book;
-import mx.dev.blank.model.BookDTO;
-import mx.dev.blank.model.BookRankingDTO;
-import mx.dev.blank.service.BookService;
-import mx.dev.blank.web.request.BookRequest;
+import mx.dev.blank.entity.Sale;
+import mx.dev.blank.model.SaleDTO;
+import mx.dev.blank.service.SaleService;
+import mx.dev.blank.web.request.SaleRequest;
 import mx.dev.blank.web.request.BookSearchForm;
 import mx.dev.blank.web.response.BaseResponse;
 import org.springframework.http.ResponseEntity;
@@ -23,20 +22,20 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/book")
-public class BookRestController {
+public class SaleRestController {
 
-  private final BookService bookService;
-  private final BookResourceAssembler.Factory assemblerFactory;
+  private final SaleService saleService;
+  private final SaleResourceAssembler.Factory assemblerFactory;
 
   @PostMapping
   public ResponseEntity<BaseResponse> createBook(
-      @Valid @RequestBody final BookRequest bookRequest, final BindingResult errors) {
+          @Valid @RequestBody final SaleRequest saleRequest, final BindingResult errors) {
 
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(BaseResponse.fail(errors.getAllErrors()));
     }
 
-    bookService.createBook(bookRequest);
+    saleService.createBook(saleRequest);
 
     return ResponseEntity.ok(BaseResponse.success("Book created successfully"));
   }
@@ -44,14 +43,14 @@ public class BookRestController {
   @PutMapping(path = "/{bookId}")
   public ResponseEntity<BaseResponse> updateBook(
       @PathVariable(name = "bookId") final int bookId,
-      @Valid @RequestBody final BookRequest bookRequest,
+      @Valid @RequestBody final SaleRequest saleRequest,
       final BindingResult errors) {
 
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(BaseResponse.fail(errors.getAllErrors()));
     }
 
-    bookService.updateBook(bookId, bookRequest);
+    saleService.updateBook(bookId, saleRequest);
 
     return ResponseEntity.ok(BaseResponse.success("Book updated successfully"));
   }
@@ -59,7 +58,7 @@ public class BookRestController {
   @DeleteMapping(path = "/{bookId}")
   public ResponseEntity<BaseResponse> deleteBook(@PathVariable(name = "bookId") final int bookId) {
 
-    bookService.deleteBook(bookId);
+    saleService.deleteBook(bookId);
     return ResponseEntity.ok(BaseResponse.success("Book deleted successfully"));
   }
 
@@ -67,30 +66,30 @@ public class BookRestController {
    * Ejercicio 1, 2, 9
    */
   @GetMapping
-  public ResponseEntity<List<BookDTO>> getBooks(
+  public ResponseEntity<List<SaleDTO>> getBooks(
       @ModelAttribute BookSearchForm form,
       @RequestParam(required = false, value = "expand", defaultValue = "")
           final List<String> expand) {
 
-    final List<Book> books = bookService.getBooks(form);
+    final List<Sale> sales = saleService.getBooks(form);
 
-    final BookResourceAssembler assembler = assemblerFactory.create(expand);
+    final SaleResourceAssembler assembler = assemblerFactory.create(expand);
 
-    return ResponseEntity.ok(assembler.toDto(books));
+    return ResponseEntity.ok(assembler.toDto(sales));
 
   }
 
   @GetMapping(path = "/{bookId}")
-  public ResponseEntity<BookDTO> getBooks(
+  public ResponseEntity<SaleDTO> getBooks(
           @PathVariable(name = "bookId") final int bookId,
           @RequestParam(required = false, value = "expand", defaultValue = "")
           final List<String> expand) {
 
-    final Book book = bookService.findByBookId(bookId);
+    final Sale sale = saleService.findByBookId(bookId);
 
-    final BookResourceAssembler assembler = assemblerFactory.create(expand);
+    final SaleResourceAssembler assembler = assemblerFactory.create(expand);
 
-    return ResponseEntity.ok(assembler.toDto(book));
+    return ResponseEntity.ok(assembler.toDto(sale));
 
 
   }
@@ -99,50 +98,50 @@ public class BookRestController {
    * Ejercicio 3
    */
   @GetMapping(value = "/author")
-  public ResponseEntity<List<BookDTO>> getBooksByAuthor(
+  public ResponseEntity<List<SaleDTO>> getBooksByAuthor(
       @RequestParam(value = "author") String author,
       @RequestParam(required = false, value = "expand", defaultValue = "")
           final List<String> expand) {
-    final List<Book> books = bookService.getBooksByAuthor(author);
+    final List<Sale> sales = saleService.getBooksByAuthor(author);
 
-    final BookResourceAssembler assembler = assemblerFactory.create(expand);
-    return ResponseEntity.ok(assembler.toDto(books));
+    final SaleResourceAssembler assembler = assemblerFactory.create(expand);
+    return ResponseEntity.ok(assembler.toDto(sales));
   }
 
   /*
    * Ejercicio 4
    */
   @GetMapping(value = "/price")
-  public ResponseEntity<List<BookDTO>> getBooksByPrice(
+  public ResponseEntity<List<SaleDTO>> getBooksByPrice(
       @RequestParam BigDecimal priceMin,
       @RequestParam BigDecimal priceMax,
       @RequestParam(required = false, value = "expand", defaultValue = "")
           final List<String> expand) {
-    final List<Book> books = bookService.getBooksByPrice(priceMin, priceMax);
+    final List<Sale> sales = saleService.getBooksByPrice(priceMin, priceMax);
 
-    final BookResourceAssembler assembler = assemblerFactory.create(expand);
-    return ResponseEntity.ok(assembler.toDto(books));
+    final SaleResourceAssembler assembler = assemblerFactory.create(expand);
+    return ResponseEntity.ok(assembler.toDto(sales));
   }
 
   /*
    * Ejercicio 5
    */
   @GetMapping(value = "/authors")
-  public ResponseEntity<List<BookDTO>> getBooksByAmountAuthors(
+  public ResponseEntity<List<SaleDTO>> getBooksByAmountAuthors(
       @RequestParam long authors,
       @RequestParam(required = false, value = "expand", defaultValue = "")
           final List<String> expand) {
-    final List<Book> books = bookService.getBooksByAmountAuthors(authors);
+    final List<Sale> sales = saleService.getBooksByAmountAuthors(authors);
 
-    final BookResourceAssembler assembler = assemblerFactory.create(expand);
-    return ResponseEntity.ok(assembler.toDto(books));
+    final SaleResourceAssembler assembler = assemblerFactory.create(expand);
+    return ResponseEntity.ok(assembler.toDto(sales));
   }
 
   /*
    * Ejercicio 6
    */
   @GetMapping(value = "/datePublication")
-  public ResponseEntity<List<BookDTO>> getBooksByDatePublication(
+  public ResponseEntity<List<SaleDTO>> getBooksByDatePublication(
       @RequestParam String startDate,
       @RequestParam String endDate,
       @RequestParam(required = false, value = "expand", defaultValue = "")
@@ -153,10 +152,10 @@ public class BookRestController {
     final Date start = date.parse(startDate);
     final Date end = date.parse(endDate);
 
-    final List<Book> books = bookService.getBooksByDate(start, end);
+    final List<Sale> sales = saleService.getBooksByDate(start, end);
 
-    final BookResourceAssembler assembler = assemblerFactory.create(expand);
-    return ResponseEntity.ok(assembler.toDto(books));
+    final SaleResourceAssembler assembler = assemblerFactory.create(expand);
+    return ResponseEntity.ok(assembler.toDto(sales));
   }
 
   /*
@@ -164,7 +163,7 @@ public class BookRestController {
    */
   @GetMapping(value = "/amountByCategory")
   public ResponseEntity<Long> getAmountOfBooksByCategory(@RequestParam String category) {
-    final Long books = bookService.getAmountOfBooksByCategory(category);
+    final Long books = saleService.getAmountOfBooksByCategory(category);
     return ResponseEntity.ok(books);
   }
 
@@ -172,13 +171,13 @@ public class BookRestController {
    * Ejercicio 8
    */
   @GetMapping(value = "/category")
-  public ResponseEntity<List<BookDTO>> getBooksByCategory(
+  public ResponseEntity<List<SaleDTO>> getBooksByCategory(
       @RequestParam String category,
       @RequestParam(required = false, value = "expand", defaultValue = "")
           final List<String> expand) {
-    final List<Book> books = bookService.getBooksByCategory(category);
+    final List<Sale> sales = saleService.getBooksByCategory(category);
 
-    final BookResourceAssembler assembler = assemblerFactory.create(expand);
-    return ResponseEntity.ok(assembler.toDto(books));
+    final SaleResourceAssembler assembler = assemblerFactory.create(expand);
+    return ResponseEntity.ok(assembler.toDto(sales));
   }
 }

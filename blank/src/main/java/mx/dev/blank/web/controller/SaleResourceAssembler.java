@@ -4,18 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import mx.dev.blank.entity.Sale;
 import mx.dev.blank.entity.User;
-import mx.dev.blank.entity.Book;
 import mx.dev.blank.entity.Product;
 import mx.dev.blank.model.UserDTO;
-import mx.dev.blank.model.BookDTO;
+import mx.dev.blank.model.SaleDTO;
 import mx.dev.blank.model.ProductDTO;
 import mx.dev.blank.service.UserService;
 import mx.dev.blank.service.CategoryService;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
-public class BookResourceAssembler {
+public class SaleResourceAssembler {
 
   @Component
   @RequiredArgsConstructor
@@ -24,8 +24,8 @@ public class BookResourceAssembler {
     private final UserService userService;
     private final CategoryService categoryService;
 
-    public BookResourceAssembler create(final List<String> expand) {
-      return new BookResourceAssembler(userService, categoryService, expand);
+    public SaleResourceAssembler create(final List<String> expand) {
+      return new SaleResourceAssembler(userService, categoryService, expand);
     }
   }
 
@@ -33,17 +33,17 @@ public class BookResourceAssembler {
   private final CategoryService categoryService;
   private final List<String> expand;
 
-  public List<BookDTO> toDto(final List<Book> books) {
-    return books.stream().map(this::toDto).collect(Collectors.toList());
+  public List<SaleDTO> toDto(final List<Sale> sales) {
+    return sales.stream().map(this::toDto).collect(Collectors.toList());
   }
 
-  public BookDTO toDto(final Book book) {
-    final BookDTO dto = new BookDTO(book);
+  public SaleDTO toDto(final Sale sale) {
+    final SaleDTO dto = new SaleDTO(sale);
 
     if (expand.contains(AUTHOR_EXPAND)) {
-      final List<User> users = userService.findByBookId(book.getId());
+      final List<User> users = userService.findByBookId(sale.getId());
       final SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
-      dto.addAuthors(
+      dto.addUsers(
           users.stream()
               .map(
                   author -> {
@@ -61,8 +61,8 @@ public class BookResourceAssembler {
     }
 
     if (expand.contains(CATEGORY_EXPAND)) {
-      final List<Product> categories = categoryService.findByBookId(book.getId());
-      dto.addCategories(
+      final List<Product> categories = categoryService.findByBookId(sale.getId());
+      dto.addProducts(
           categories.stream()
               .map(
                   product -> {

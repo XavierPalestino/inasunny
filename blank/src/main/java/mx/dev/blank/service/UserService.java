@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
-import mx.dev.blank.dao.UserDAO;
+import mx.dev.blank.entity.dao.UserDAO;
 import mx.dev.blank.entity.User;
 import mx.dev.blank.exception.ResourceNotFoundException;
 import mx.dev.blank.model.UserDTO;
