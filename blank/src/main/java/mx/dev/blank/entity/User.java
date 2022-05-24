@@ -28,15 +28,6 @@ public class User implements Serializable {
   @Column(name = "name", nullable = false, length = 50)
   private String name;
 
-  @Column(name = "first_surname", nullable = false, length = 50)
-  private String firstSurname;
-
-  @Column(name = "second_surname", length = 50)
-  private String secondSurname;
-
-  @Column(name = "address", nullable = false, length = 50)
-  private String address;
-
   @Column(name = "phone_number", nullable = false, length = 11)
   private int phoneNumber;
 
@@ -46,17 +37,11 @@ public class User implements Serializable {
   public static User newAuthor(
       final String username,
       final String name,
-      final String firstSurname,
-      final String secondSurname,
-      final String address,
       final int phoneNumber,
       final String password) {
     return new User(
             username,
             name,
-            firstSurname,
-            secondSurname,
-            address,
             phoneNumber,
             password);
   }
@@ -64,16 +49,10 @@ public class User implements Serializable {
   private User(
           final String username,
           final String name,
-          final String firstSurname,
-          final String secondSurname,
-          final String address,
           final int phoneNumber,
           final String password) {
     this.username = username;
     this.name = name;
-    this.firstSurname = firstSurname;
-    this.secondSurname = secondSurname;
-    this.address = address;
     this.phoneNumber = phoneNumber;
     this.password = password;
   }
@@ -81,9 +60,6 @@ public class User implements Serializable {
   public void update(final UserRequest request) {
     this.username = request.getUsername();
     this.name = request.getName();
-    this.firstSurname = request.getFirstSurname();
-    this.secondSurname = request.getSecondSurname();
-    this.address = request.getAddress();
     this.phoneNumber = request.getPhoneNumber();
     this.password = request.getPassword();
   }

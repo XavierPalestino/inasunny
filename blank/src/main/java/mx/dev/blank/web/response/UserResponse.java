@@ -8,7 +8,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
-public class AuthorResponse {
+public class UserResponse {
 
     private final List<UserDTO> authors;
 }

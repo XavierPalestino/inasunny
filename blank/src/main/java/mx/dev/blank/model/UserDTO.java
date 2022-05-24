@@ -13,9 +13,6 @@ public class UserDTO implements Serializable {
   private final int id;
   private final String username;
   private final String name;
-  private final String firstName;
-  private final String secondName;
-  private final String address;
   private final int phoneNumber;
   private final String password;
 

@@ -28,9 +28,6 @@ public class UserService {
         User.newAuthor(
             request.getUsername(),
             request.getName(),
-            request.getFirstSurname(),
-            request.getSecondSurname(),
-            request.getAddress(),
             request.getPhoneNumber(),
             request.getPassword());
     userDAO.create(user);
@@ -71,9 +68,6 @@ public class UserService {
               author.getId(),
               author.getUsername(),
               author.getName(),
-              author.getFirstSurname(),
-              author.getSecondSurname(),
-              author.getAddress(),
               author.getPhoneNumber(),
               author.getPassword());
     }).collect(Collectors.toList());

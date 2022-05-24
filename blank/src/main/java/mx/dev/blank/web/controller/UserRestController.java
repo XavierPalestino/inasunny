@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import mx.dev.blank.model.UserDTO;
 import mx.dev.blank.service.UserService;
 import mx.dev.blank.web.request.UserRequest;
-import mx.dev.blank.web.response.AuthorResponse;
+import mx.dev.blank.web.response.UserResponse;
 import mx.dev.blank.web.response.BaseResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -62,10 +62,10 @@ public class UserRestController {
 
   @CrossOrigin(origins = "http://localhost:8080")
   @GetMapping(path = "/list")
-  public ResponseEntity<AuthorResponse> getAuthors() {
+  public ResponseEntity<UserResponse> getAuthors() {
 
     final List<UserDTO> retrieved = userService.findAll();
 
-    return ResponseEntity.ok(new AuthorResponse(retrieved));
+    return ResponseEntity.ok(new UserResponse(retrieved));
   }
 }

@@ -21,17 +21,6 @@ public class UserRequest implements Serializable {
   @Size(max = 255)
   private String name;
 
-  @NotNull
-  @Size(max = 255)
-  private String firstSurname;
-
-  @NotNull
-  @Size(max = 255)
-  private String secondSurname;
-
-  @NotNull
-  @Size(max = 255)
-  private String address;
 
   @NotNull
   @Size(max = 11)
