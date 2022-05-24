@@ -6,15 +6,15 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class AuthorDTO implements Serializable {
+public class UserDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private final int id;
+  private final String username;
   private final String name;
-  private final String firstName;
-  private final String secondName;
-  private final String birthday;
+  private final int phoneNumber;
+  private final String password;
 
 
 }

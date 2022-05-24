@@ -10,50 +10,50 @@ import javax.persistence.criteria.Root;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import mx.dev.blank.entity.Author;
+import mx.dev.blank.entity.User;
 import mx.dev.blank.entity.Book;
 import mx.dev.blank.entity.Book_;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class AuthorJpaDAO implements AuthorDAO {
+public class UserJpaDAO implements UserDAO {
 
   @Setter(onMethod = @__(@PersistenceContext), value = AccessLevel.PACKAGE)
   private EntityManager em;
 
   /* create */
   @Override
-  public void create(final Author author) {
-    em.persist(author);
+  public void create(final User user) {
+    em.persist(user);
   }
 
   /* update */
   @Override
-  public void update(final Author author) {
-    em.merge(author);
+  public void update(final User user) {
+    em.merge(user);
   }
 
   /* Delete */
   @Override
-  public void delete(final Author author) {
-    em.remove(author);
+  public void delete(final User user) {
+    em.remove(user);
   }
 
   /* Select * FROM author WHERE id = ? */
   @Override
-  public Author findById(final int id) {
-    return em.find(Author.class, id);
+  public User findById(final int id) {
+    return em.find(User.class, id);
   }
 
   @Override
-  public List<Author> findByBookId(final int bookId) {
+  public List<User> findByBookId(final int bookId) {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Author> query = builder.createQuery(Author.class);
+    final CriteriaQuery<User> query = builder.createQuery(User.class);
     final Root<Book> root = query.from(Book.class);
 
-    final Join<Book, Author> authorJoin = root.join(Book_.authors);
+    final Join<Book, User> authorJoin = root.join(Book_.users);
 
     query.select(authorJoin).where(builder.equal(root.get(Book_.id), bookId));
 
@@ -62,11 +62,11 @@ public class AuthorJpaDAO implements AuthorDAO {
 
   /* SELECT * FROM authors */
   @Override
-  public List<Author> findAll() {
+  public List<User> findAll() {
 
     final CriteriaBuilder builder = em.getCriteriaBuilder();
-    final CriteriaQuery<Author> query = builder.createQuery(Author.class);
-    final Root<Author> root = query.from(Author.class);
+    final CriteriaQuery<User> query = builder.createQuery(User.class);
+    final Root<User> root = query.from(User.class);
 
     query.select(root);
 

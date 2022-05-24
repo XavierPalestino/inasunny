@@ -7,9 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.Getter;
-import mx.dev.blank.entity.Author;
 import mx.dev.blank.entity.Book;
-import mx.dev.blank.entity.Category;
 
 @Getter
 public class BookDTO implements Serializable {
@@ -26,7 +24,7 @@ public class BookDTO implements Serializable {
   private final String releaseDate;
 
   @JsonInclude(JsonInclude.Include.NON_EMPTY)
-  private Set<AuthorDTO> authors = new HashSet<>();
+  private Set<UserDTO> authors = new HashSet<>();
 
   @JsonInclude(JsonInclude.Include.NON_EMPTY)
   private Set<CategoryDTO> categories = new HashSet<>();
@@ -42,7 +40,7 @@ public class BookDTO implements Serializable {
     this.releaseDate = new SimpleDateFormat("MM-dd-yyyy").format(book.getReleaseDate());
   }
 
-  public void addAuthors(final Set<AuthorDTO> authors) {
+  public void addAuthors(final Set<UserDTO> authors) {
     this.authors.addAll(authors);
   }
 

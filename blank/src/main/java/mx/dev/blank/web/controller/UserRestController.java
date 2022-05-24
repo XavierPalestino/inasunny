@@ -2,10 +2,10 @@ package mx.dev.blank.web.controller;
 
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mx.dev.blank.model.AuthorDTO;
-import mx.dev.blank.service.AuthorService;
-import mx.dev.blank.web.request.AuthorRequest;
-import mx.dev.blank.web.response.AuthorResponse;
+import mx.dev.blank.model.UserDTO;
+import mx.dev.blank.service.UserService;
+import mx.dev.blank.web.request.UserRequest;
+import mx.dev.blank.web.response.UserResponse;
 import mx.dev.blank.web.response.BaseResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,20 +17,20 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/author")
-public class AuthorRestController {
+public class UserRestController {
 
-  private final AuthorService authorService;
+  private final UserService userService;
 
   @CrossOrigin(origins = "http://localhost:8080")
   @PostMapping
   public ResponseEntity<BaseResponse> createAuthor(
-      @Valid @RequestBody final AuthorRequest authorRequest, final BindingResult errors) {
+          @Valid @RequestBody final UserRequest userRequest, final BindingResult errors) {
 
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(BaseResponse.fail(errors.getAllErrors()));
     }
 
-    authorService.createAuthor(authorRequest);
+    userService.createAuthor(userRequest);
 
     return ResponseEntity.ok(BaseResponse.success("Author created successfully"));
   }
@@ -39,14 +39,14 @@ public class AuthorRestController {
   @PutMapping(path = "/{authorId}")
   public ResponseEntity<BaseResponse> updateAuthor(
       @PathVariable(name = "authorId") final int authorId,
-      @Valid @RequestBody final AuthorRequest authorRequest,
+      @Valid @RequestBody final UserRequest userRequest,
       final BindingResult errors) {
 
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(BaseResponse.fail(errors.getAllErrors()));
     }
 
-    authorService.updateAuthor(authorId, authorRequest);
+    userService.updateAuthor(authorId, userRequest);
 
     return ResponseEntity.ok(BaseResponse.success("Author updated successfully"));
   }
@@ -56,16 +56,16 @@ public class AuthorRestController {
   public ResponseEntity<BaseResponse> deleteAuthor(
       @PathVariable(name = "authorId") final int authorId) {
 
-    authorService.deleteAuthor(authorId);
+    userService.deleteAuthor(authorId);
     return ResponseEntity.ok(BaseResponse.success("Author deleted successfully"));
   }
 
   @CrossOrigin(origins = "http://localhost:8080")
   @GetMapping(path = "/list")
-  public ResponseEntity<AuthorResponse> getAuthors() {
+  public ResponseEntity<UserResponse> getAuthors() {
 
-    final List<AuthorDTO> retrieved = authorService.findAll();
+    final List<UserDTO> retrieved = userService.findAll();
 
-    return ResponseEntity.ok(new AuthorResponse(retrieved));
+    return ResponseEntity.ok(new UserResponse(retrieved));
   }
 }

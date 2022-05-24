@@ -4,13 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import mx.dev.blank.entity.Author;
+import mx.dev.blank.entity.User;
 import mx.dev.blank.entity.Book;
 import mx.dev.blank.entity.Category;
-import mx.dev.blank.model.AuthorDTO;
+import mx.dev.blank.model.UserDTO;
 import mx.dev.blank.model.BookDTO;
 import mx.dev.blank.model.CategoryDTO;
-import mx.dev.blank.service.AuthorService;
+import mx.dev.blank.service.UserService;
 import mx.dev.blank.service.CategoryService;
 import org.springframework.stereotype.Component;
 
@@ -21,15 +21,15 @@ public class BookResourceAssembler {
   @RequiredArgsConstructor
   public static class Factory {
 
-    private final AuthorService authorService;
+    private final UserService userService;
     private final CategoryService categoryService;
 
     public BookResourceAssembler create(final List<String> expand) {
-      return new BookResourceAssembler(authorService, categoryService, expand);
+      return new BookResourceAssembler(userService, categoryService, expand);
     }
   }
 
-  private final AuthorService authorService;
+  private final UserService userService;
   private final CategoryService categoryService;
   private final List<String> expand;
 
@@ -41,20 +41,21 @@ public class BookResourceAssembler {
     final BookDTO dto = new BookDTO(book);
 
     if (expand.contains(AUTHOR_EXPAND)) {
-      final List<Author> authors = authorService.findByBookId(book.getId());
+      final List<User> users = userService.findByBookId(book.getId());
       final SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
       dto.addAuthors(
-          authors.stream()
+          users.stream()
               .map(
                   author -> {
-                    return new AuthorDTO(
+                    return new UserDTO(
                         author.getId(),
+                        author.getUsername(),
                         author.getName(),
-                        author.getFirstName(),
-                        author.getSecondName(),
-                        author.getBirthday() != null
-                            ? df.format(author.getBirthday())
-                            : "Desconocido");
+                        author.getFirstSurname(),
+                        author.getSecondSurname(),
+                        author.getAddress(),
+                        author.getPhoneNumber(),
+                        author.getPassword());
                   })
               .collect(Collectors.toSet()));
     }
