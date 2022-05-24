@@ -1,0 +1,54 @@
+<form class="normal-form" [formGroup]="form">
+    <mat-grid-list cols="1" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="controles-container">
+              <mat-form-field>
+                <input formControlName="productName" matInput placeholder="Producto">
+                <mat-error>Campo requerido</mat-error>
+              </mat-form-field>
+
+              <table class="example-full-width" border-spacing="1"><tr>
+                <td><mat-form-field>
+                  <input formControlName="productCode" matInput type="number" placeholder="Código">
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field></td>
+                <td><mat-form-field>
+                  <input formControlName="productBrand" matInput placeholder="Marca">
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field></td>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Caducidad</mat-label>
+                    <input formControlName="expirationDate" matInput [min]="minDate" [matDatepicker]="datepicker" placeholder="dd/mm/yyyy">
+                    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker></mat-datepicker>
+                    <mat-error *ngIf="form.controls['expirationDate'].errors?.required">Campo requerido</mat-error>
+                  </mat-form-field></td>
+              </tr></table>
+
+              <table class="example-full-width" border-spacing="1"><tr>
+                <td><mat-form-field>
+                  <input formControlName="productPrice" matInput type="number" placeholder="Precio">
+                  <span matPrefix>$&nbsp;</span>
+                  <span matSuffix>.00</span>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field></td>
+                <td><mat-form-field>
+                  <input formControlName="productCost" matInput type="number" placeholder="Costo">
+                  <span matPrefix>$&nbsp;</span>
+                  <span matSuffix>.00</span>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field></td>
+                <td><mat-form-field>
+                  <input formControlName="productQuantity" matInput type="number" placeholder="Cantidad">
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field></td>
+              </tr></table>
+                  <div class="button-row">
+                    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
+                    <button mat-stroked-button color="warn" (click)="onClear()">Clear</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>

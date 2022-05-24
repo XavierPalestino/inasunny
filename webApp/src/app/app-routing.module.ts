@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthorsListComponent } from './shared/components/pages/authors/authors-list/authors-list.component';
-import { BooksListComponent } from './shared/components/pages/books/books-list/books-list.component';
-import { CategoriesListComponent } from './shared/components/pages/categories/categories-list/categories-list.component';
+import { UsersListComponent } from './shared/components/pages/users/users-list/users-list.component';
+import { SalesListComponent } from './shared/components/pages/sales/sales-list/sales-list.component';
+import { ProductsListComponent } from './shared/components/pages/products/products-list/products-list.component';
 
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/first', pathMatch: 'full' },
-  { path: 'first', component:  AuthorsListComponent},
-  { path: 'second', component:  BooksListComponent},
-  { path: 'third', component: CategoriesListComponent},
+  { path: 'first', component:  UsersListComponent},
+  { path: 'second', component:  SalesListComponent},
+  { path: 'third', component: ProductsListComponent},
 ];
 export const appRouting = RouterModule.forRoot(routes);
 @NgModule({

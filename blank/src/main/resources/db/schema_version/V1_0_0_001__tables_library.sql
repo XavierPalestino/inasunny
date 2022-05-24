@@ -24,9 +24,6 @@ CREATE TABLE user(
                         id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
                         username varchar(50) NOT NULL,
                         name varchar(50) NOT NULL,
-                        first_surname varchar(50) NOT NULL,
-                        second_surname varchar(50) NOT NULL,
-                        address varchar(50) NOT NULL,
                         phone_number int(11) NOT NULL,
                         password varchar(18) NOT NULL,
                         deleted boolean NOT NULL,
@@ -49,9 +46,3 @@ CREATE TABLE sale_product(
                             CONSTRAINT sale_product_product_id_fk FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB;
 
-CREATE TABLE provider(
-                        id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                        provider_name varchar(50) NOT NULL,
-                        provider_rfc int(13) UNSIGNED NOT NULL,
-                        PRIMARY KEY (id)
-)ENGINE=InnoDB;

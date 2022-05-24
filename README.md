@@ -1,4 +1,4 @@
-# iwana-book
+# iwana-sale
 Basic project to demo the use of Spring, Hibernate and JPA.
 
 
@@ -35,12 +35,12 @@ password: demo
     
  Endpoints:
 
-    1. Show all books sorted by year of publication in ascending order, the results should be paginated. (10 books in total, leaving 2 books per page)
-    2. Books descending by year of publication. (10 books in total, leaving 2 books per page)
-    3. Search for those books where X author participated by matching either his first or last name.
+    1. Show all sales sorted by year of publication in ascending order, the results should be paginated. (10 sales in total, leaving 2 sales per page)
+    2. Books descending by year of publication. (10 sales in total, leaving 2 sales per page)
+    3. Search for those sales where X user participated by matching either his first or last name.
     4. Where the price is in the range from priceMinimum to priceMaximum.
-    5. Given a number, search for books containing that number of authors.
-    6. Search for those books in a date range (StartDate, EndDate) of publication.
-    7. Number of books that exist of x category
-    8. Filter books by category.
-    9. Filter books in ascending and descending order by number of pages contained in the book.
+    5. Given a number, search for sales containing that number of users.
+    6. Search for those sales in a date range (StartDate, EndDate) of publication.
+    7. Number of sales that exist of x products
+    8. Filter sales by products.
+    9. Filter sales in ascending and descending order by number of pages contained in the sale.

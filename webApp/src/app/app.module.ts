@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BookComponent } from './shared/components/pages/books/book/book.component';
-import { CategoryComponent } from './shared/components/pages/categories/category/category.component';
-import { AuthorComponent } from './shared/components/pages/authors/author/author.component';
-import { AuthorsListComponent } from './shared/components/pages/authors/authors-list/authors-list.component';
-import { BooksListComponent } from './shared/components/pages/books/books-list/books-list.component';
-import { CategoriesListComponent } from './shared/components/pages/categories/categories-list/categories-list.component';
+import { SaleComponent } from './shared/components/pages/sales/sale/sale.component';
+import { ProductComponent } from './shared/components/pages/products/product/product.component';
+import { UserComponent } from './shared/components/pages/users/user/user.component';
+import { UsersListComponent } from './shared/components/pages/users/users-list/users-list.component';
+import { SalesListComponent } from './shared/components/pages/sales/sales-list/sales-list.component';
+import { ProductsListComponent } from './shared/components/pages/products/products-list/products-list.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,12 +36,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
-    AuthorComponent,
-    AuthorsListComponent,
-    BookComponent,
-    BooksListComponent,
-    CategoryComponent,
-    CategoriesListComponent
+    UserComponent,
+    UsersListComponent,
+    SaleComponent,
+    SalesListComponent,
+    ProductComponent,
+    ProductsListComponent
   ],
   imports: [
     BrowserModule,
@@ -71,12 +71,12 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTabsModule
   ],
   bootstrap: [AppComponent,
-    AuthorComponent,
-    AuthorsListComponent,
-    BookComponent,
-    BooksListComponent,
-    CategoryComponent,
-    CategoriesListComponent],
+    UserComponent,
+    UsersListComponent,
+    SaleComponent,
+    SalesListComponent,
+    ProductComponent,
+    ProductsListComponent],
   entryComponents: []
 })
 export class AppModule { }

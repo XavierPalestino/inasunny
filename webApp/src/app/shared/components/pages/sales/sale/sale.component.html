@@ -1,0 +1,34 @@
+<form class="normal-form" [formGroup]="form">
+    <mat-grid-list cols="1" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="controles-container">
+              <table><tr>
+                <td><mat-form-field>
+                  <mat-label>Fecha</mat-label>
+                  <input formControlName="saleDate" matInput [max]="maxDate" [matDatepicker]="datepicker" placeholder="mm/dd/yyyy">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker></mat-datepicker>
+                  <mat-error *ngIf="form.controls['saleDate'].errors?.required">Campo requerido</mat-error>
+                </mat-form-field></td>
+
+                <td><mat-form-field>
+                  <mat-select formControlName="users" placeholder="Usuario" multiple>
+                    <mat-option *ngFor="let users of usersList" value="{{users?.id}}">{{users?.username}}</mat-option>
+                  </mat-select>
+                  <mat-error>Campo requerido</mat-error>
+                </mat-form-field></td>
+              </tr></table>
+              <mat-form-field>
+                <mat-select id="choices-multiple-remove-button2" formControlName="products" placeholder="Productos" multiple>
+                  <mat-option *ngFor="let products of productsList" value="{{products?.id}}">{{products?.productCode}} {{products?.productName}} {{products?.productPrice}}</mat-option>
+                </mat-select>
+                <mat-error>Campo requerido</mat-error>
+              </mat-form-field>
+                <div class="button-row">
+                    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
+                    <button mat-stroked-button color="warn" (click)="onClear()">Clear</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
